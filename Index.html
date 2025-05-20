@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ComunicaPlayers - Painel Oficial</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&family=Rajdhani:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: linear-gradient(135deg, #0a0a0a, #1a1a1a);
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    #entrada {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: #000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      gap: 30px;
+    }
+
+    #entrada button {
+      background: linear-gradient(135deg, crimson, darkred);
+      color: white;
+      padding: 18px 40px;
+      border: 2px solid #ff0044;
+      border-radius: 15px;
+      font-size: 1.4rem;
+      font-family: 'Orbitron';
+      cursor: pointer;
+      box-shadow: 0 0 20px crimson;
+      transition: all 0.4s ease;
+      text-transform: uppercase;
+    }
+
+    #entrada button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 30px crimson;
+    }
+
+    header {
+      padding: 30px;
+      background: rgba(0,0,0,0.8);
+      text-align: center;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.4rem;
+      color: crimson;
+      text-shadow: 0 0 10px crimson;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 50px;
+      padding: 60px 10vw;
+    }
+
+    .btn {
+      padding: 18px 35px;
+      font-size: 1.3rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-family: 'Orbitron', sans-serif;
+      box-shadow: 0 0 15px #000;
+    }
+
+    .btn:hover {
+      transform: scale(1.1);
+    }
+
+    .bater {
+      background: linear-gradient(to right, #00ff88, #00c488);
+      color: #000;
+    }
+
+    .desbater {
+      background: linear-gradient(to right, #ff0044, #c40038);
+      color: #fff;
+    }
+
+    .msg {
+      margin-top: 10px;
+      font-size: 1.5rem;
+      animation: fadeIn 1s ease;
+    }
+
+    .mural {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 25px;
+      border-radius: 15px;
+      width: 100%;
+      max-width: 800px;
+      backdrop-filter: blur(10px);
+      text-align: left;
+      border: 2px solid crimson;
+    }
+
+    .mural h2 {
+      font-family: 'Orbitron';
+      color: crimson;
+      margin-bottom: 10px;
+    }
+
+    .status {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .status h3 {
+      font-size: 1.6rem;
+      color: crimson;
+      font-family: 'Orbitron';
+    }
+
+    .mapinha {
+      width: 200px;
+      height: 80px;
+      background: #2b2b2b;
+      border: 2px solid crimson;
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+    }
+
+    .steve {
+      width: 20px;
+      height: 20px;
+      background: red;
+      border-radius: 50%;
+      position: absolute;
+      top: 30px;
+      animation: correr 4s infinite linear;
+    }
+
+    @keyframes correr {
+      0% { left: -20px; }
+      100% { left: 200px; }
+    }
+
+    @keyframes fadeIn {
+      0% {opacity: 0; transform: translateY(10px);}
+      100% {opacity: 1; transform: translateY(0);}
+    }
+  </style>
+</head>
+<body>
+  <div id="entrada">
+    <h1 style="font-family: 'Orbitron'; color: crimson; font-size: 2.3rem;">Bem-vindo ao ComunicaPlayers</h1>
+    <button onclick="entrarSite()">Entrar como Player</button>
+  </div>
+
+  <header>ComunicaPlayers - Portal do CEO NERVAS</header>
+
+  <main style="display:none;">
+    <button class="btn bater" onclick="baterPonto()">BATER PONTO</button>
+    <button class="btn desbater" onclick="desbaterPonto()">DESBATER PONTO</button>
+    <div id="mensagem" class="msg"></div>
+
+    <div class="status">
+      <h3>Status no Mapa:</h3>
+      <div class="mapinha">
+        <div class="steve"></div>
+      </div>
+    </div>
+
+    <div class="mural">
+      <h2>Mural de Avisos do CEO</h2>
+      <p>Só o NERVAS pode editar isso aqui. Mexeu? Ban instantâneo.</p>
+      <ul>
+        <li><strong>ATENÇÃO:</strong> TODOS OS MEMBROS DO GRUPO ESTEJAM CIENTES DE BATER E DESBATER O PONTO.</li>
+        <li><em>Isso ajuda a mantermos o controle de quem está disponível para jogar e quem já saiu.</em></li>
+        <li><em>Use o botão "Bater Ponto" quando estiver pronto pra jogar, e "Desbater" quando for sair.</em></li>
+        <li>[14/05] Vamos jogar MINECRAFT SÁBADO às 21h</li>
+        <li>[13/05] Ranking será atualizado às 20h</li>
+      </ul>
+    </div>
+  </main>
+
+  <script>
+    function entrarSite() {
+      document.getElementById('entrada').style.display = 'none';
+      document.querySelector('main').style.display = 'flex';
+    }
+
+    function baterPonto() {
+      const msg = document.getElementById('mensagem');
+      msg.style.color = '#00ff88';
+      msg.innerText = 'PONTO BATIDO COM SUCESSO';
+      msg.style.animation = 'fadeIn 0.6s ease';
+    }
+
+    function desbaterPonto() {
+      const msg = document.getElementById('mensagem');
+      msg.style.color = '#ff0044';
+      msg.innerText = 'PONTO DESBATIDO';
+      msg.style.animation = 'fadeIn 0.6s ease';
+    }
+  </script>
+</body>
+</html> no Nether</h3>
+    <p>Data: 12/05 — Prêmio: Skin personalizada e 2.000 coins!</p>
+  </div>
+  <div class="evento">
+    <h3>Batalha de Clãs</h3>
+    <p>Data: 20/05 — Prêmio: Kit VIP + Tag exclusiva por 1 mês!</p>
+  </div>
+  <div class="evento">
+    <h3>Caça ao Tesouro</h3>
+    <p>Data: 25/05 — Prêmio: 10 caixas misteriosas + vaga no mural da fama.</p>
+  </div>
+</section><section class="section" id="membros">
+  <h2>Área de Membros</h2>
+  <p>Conheça os lendários da comunidade NERVASJJ!</p>
+  <ul class="membros-list">
+    <li>
+      <img src="https://mc-heads.net/avatar/NinjaPvPZ" alt="NinjaPvPZ" />
+      <span>NinjaPvPZ</span>
+    </li>
+    <li>
+      <img src="https://mc-heads.net/avatar/BiaPlay_" alt="BiaPlay_" />
+      <span>BiaPlay_</span>
+    </li>
+    <li>
+      <img src="https://mc-heads.net/avatar/PedroCraft" alt="PedroCraft" />
+      <span>PedroCraft</span>
+    </li>
+  </ul>
+</section><section class="section" id="config">
+  <h2>Configurações</h2>
+  <p>Customize sua experiência no servidor:</p>
+  <ul class="config-opcoes">
+    <li>Alterar idioma (em breve)</li>
+    <li>Ativar notificações de eventos</li>
+    <li>Sincronizar com o Discord</li>
+  </ul>
+</section> <section id="hall-da-fama" style="padding: 60px 20px; background: linear-gradient(to right, #0f0f0f, #1a1a1a); color: white; text-align: center;">
+  <h2 style="font-size: 2.5rem; color: #00ffe1; margin-bottom: 40px;">HALL DA FAMA</h2>  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;">
+    <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 280px; border-left: 4px solid #00ffe1;">
+      <h3 style="color: #00ffe1;">ZNMaster</h3>
+      <p>Foi o primeiro jogador a zerar o evento "Caverna da Morte" sem morrer uma vez!</p>
+    </div><div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 280px; border-left: 4px solid #00ffe1;">
+  <h3 style="color: #00ffe1;">BiaGamePlay</h3>
+  <p>Top 1 PvP do servidor por 3 semanas seguidas. Ninguém segurava!</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 280px; border-left: 4px solid #00ffe1;">
+  <h3 style="color: #00ffe1;">PedroCraft</h3>
+  <p>Fundou a guilda mais famosa do servidor, que dominou o mapa por 2 meses!</p>
+</div>
+
+  </div>  <p style="margin-top: 40px; font-size: 1.1rem; color: #aaa;">Você também quer entrar pro Hall da Fama? Então loga no servidor e faça história!</p>
+</section>  <section id="administracao" style="padding: 60px 20px; background: #121212; color: white; text-align: center;">
+  <h2 style="font-size: 2.5rem; color: #ff005c; margin-bottom: 40px;">ADMINISTRAÇÃO</h2>  <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 30px;"><div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 280px; border-top: 4px solid #ff005c;">
+  <img src="https://i.imgur.com/O1XQbNN.png" alt="Dono" style="width: 80px; border-radius: 50%; margin-bottom: 15px;">
+  <h3>Murillo (NERVASJJ)</h3>
+  <p style="color: #aaa;">Fundador do servidor e idealizador do projeto. Sempre na missão de inovar.</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 280px; border-top: 4px solid #ff005c;">
+  <img src="https://i.imgur.com/5cWJ2yK.png" alt="Moderador" style="width: 80px; border-radius: 50%; margin-bottom: 15px;">
+  <h3>LucasZ</h3>
+  <p style="color: #aaa;">Moderador ativo, responsável por eventos e resolver tretas da comunidade.</p>
+</div>
+
+<div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 12px; width: 280px; border-top: 4px solid #ff005c;">
+  <img src="https://i.imgur.com/J5ZLzY0.png" alt="Staff" style="width: 80px; border-radius: 50%; margin-bottom: 15px;">
+  <h3>AnaGamer</h3>
+  <p style="color: #aaa;">Staff da madrugada, sempre pronta pra ajudar quando o caos começa.</p>
+</div>
+
+  </div>  <p style="margin-top: 40px; font-size: 1.1rem; color: #ccc;">Nosso time trabalha duro pra manter o servidor divertido, justo e seguro pra todo mundo!</p>
+</section>
